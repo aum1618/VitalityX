@@ -1,75 +1,66 @@
 import styled from "styled-components/native";
 
-const defaultTextStyles = (theme) => `
-font-family: ${theme.fonts.fontRegular};
-  font-weight: ${theme.fontWeights.regular};
-  color: ${theme.colors.text};
+const defaultTextStyles = (theme, fontFamily, color) => `
+  font-family: ${theme.fonts[fontFamily] || theme.fonts.fontRegular};
+  color: ${theme.colors[color] || theme.colors.black};
   flex-wrap: wrap;
   margin-top: 0px;
   margin-bottom: 0px;
 `;
 
+
 const heading1 = (theme) => `
     font-size: ${theme.fontSizes.h1};
-    font-family: ${theme.fonts.fontBold};
+    line-height: ${1.5 * parseFloat(theme.fontSizes.h1)}px;
 `;
 const heading2 = (theme) => `
     font-size: ${theme.fontSizes.h2};
-    font-weight:${theme.fontWeights.semiBold};
-    line-height:${theme.lineHeights[3]};
+    line-height: ${1.5 * parseFloat(theme.fontSizes.h2)}px;
+
+`;
+const heading3 = (theme) => `
+    font-size: ${theme.fontSizes.h3};
+    line-height: ${1.5 * parseFloat(theme.fontSizes.h3)}px;
 
 `;
 const title = (theme) => `
 font-size: ${theme.fontSizes.title};
-font-weight:${theme.fontWeights.semiBold};
-line-height:${theme.lineHeights[2]};
+line-height: ${1.5 * parseFloat(theme.fontSizes.title)}px;
 
 `;
 const subHeading = (theme) => `
 font-size: ${theme.fontSizes.subhead};
-font-weight:${theme.fontWeights.semiBold};
+line-height: ${1.5 * parseFloat(theme.fontSizes.subhead)}px;
 
 `;
 
-const body = (theme) => `
-font-size:${theme.fontSizes.subhead};
-font-weight:${theme.fontWeights.regular};
 
-`;
 const description = (theme) => `
 font-size: ${theme.fontSizes.description};
-font-weight:${theme.fontWeights.medium};
-line-height:${theme.lineHeights[0]};
+line-height: ${1.5 * parseFloat(theme.fontSizes.description)}px;
 
 `;
 
-const caption = (theme) => `
-font-size: ${theme.fontSizes.description};
-    font-weight: ${theme.fontWeights.regular};
-    line-height:${theme.lineHeights[1]};
-
-
-`;
-const hint = (theme) => `
+const helper = (theme) => `
     font-size: ${theme.fontSizes.helper};
+    line-height: ${1.5 * parseFloat(theme.fontSizes.helper)}px;
     
 `;
 const variants = {
-  heading1,
-  heading2,
-  title,
-  subHeading,
-  body,
-  description,
-  caption,
-  hint,
+  h1: heading1,
+  h2: heading2,
+  h3: heading3,
+  title: title,
+  subtitle: subHeading,
+  body: description,
+  helper: helper,
 };
 
+
 export const Text = styled.Text`
-  ${({ theme }) => defaultTextStyles(theme)}
+  ${({ theme, family, color }) => defaultTextStyles(theme, family, color)}
   ${({ variant, theme }) => variants[variant](theme)}
 `;
-
 Text.defaultProps = {
   variant: "body",
 };
